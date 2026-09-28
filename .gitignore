@@ -1,0 +1,27 @@
+# Системные файлы операционных систем
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Настройки сред разработки (IDE) и редакторов
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# Логи и кэш
+*.log
+logs/
+.cache/
+
+# Файлы с секретами и переменными окружения (пароли, API-ключи)
+.env
+.env.local
+.env.*.local
+
+# Временные файлы и папки
+tmp/
+temp/
