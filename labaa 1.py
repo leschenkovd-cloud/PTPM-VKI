@@ -6,23 +6,23 @@ logging.basicConfig(
     format="%(asctime)s | [%(levelname)-7s] | %(message)s",
     datefmt="%Y-%m-%d %H:%M:%S",
     handlers=[logging.StreamHandler(sys.stdout), logging.FileHandler("logs/file_txt.log", encoding="utf-8")]
-)
+)#два пути
 logger = logging.getLogger(__name__)
 
 
-# Маскирование (детерминированное: одинаковый пароль = одинаковый хеш
+# одинаковый пароль = одинаковый хеш
 def mask(p): return f"***{hashlib.sha256(p.encode()).hexdigest()[:8]}***" if p else "***EMPTY***"
 
 
 # Основная валидация (возвращает >10 уникальных ошибок)
 def validate(login, pwd, pwd2):
-    login = str(login).strip()
+    login = str(login).strip() #логин в текст и без пробелов
 
     # Проверки логина
     if not login: return False, "Логин пуст"
     is_phone = bool(re.match(r"^\+\d-\d{3}-\d{3}-\d{4}$", login))
     is_email = bool(re.match(r"^[^@]+@[^@]+\.[^@]+$", login))
-    is_str = bool(re.match(r"^[a-zA-Z0-9_]{5,}$", login))
+    is_str = bool(re.match(r"^[a-zA-Z0-9_]{5,}$", login)) #минимум 5 символов и англ
     if not (is_phone or is_email or is_str): return False, "Неверный формат логина"
     if login.lower() in {"admin", "root", "user", "test"}: return False, "Логин в черном списке"
 
@@ -30,7 +30,7 @@ def validate(login, pwd, pwd2):
     if not pwd: return False, "Пароль пуст"
     if len(pwd) < 7: return False, "Пароль короче 7 символов"
     # Только кириллица, цифры и спецсимволы (латиница запрещена)
-    if not re.match(r"^[а-яА-ЯёЁ0-9!@#$%^&*()_+?=\-]+$",
+    if not re.match(r"^[а-яА-ЯёЁ0-9!@#$%^&*()_+?=\-]+$", #русские буквы и спецсиволы
                     pwd): return False, "Пароль содержит недопустимые символы (например, латиницу)"
     if not re.search(r"[А-ЯЁ]", pwd): return False, "Нет заглавной кириллицы"
     if not re.search(r"[а-яё]", pwd): return False, "Нет строчной кириллицы"
@@ -44,7 +44,7 @@ def validate(login, pwd, pwd2):
 
 # Обертка для логирования запроса
 def process(login, pwd, pwd2):
-    logger.info(f"Запрос: логин='{login}', пароль={mask(pwd)}")
+    logger.info(f"Запрос: логин='{login}', пароль={mask(pwd)}") #маскируем пароль
     is_ok, msg = validate(login, pwd, pwd2)
     if is_ok:
         logger.info(f"Успех: регистрация '{login}' разрешена.")
