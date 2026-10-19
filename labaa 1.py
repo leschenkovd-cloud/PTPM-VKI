@@ -10,7 +10,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-# Маскирование (детерминированное: одинаковый пароль = одинаковый хеш)
+# Маскирование (детерминированное: одинаковый пароль = одинаковый хеш
 def mask(p): return f"***{hashlib.sha256(p.encode()).hexdigest()[:8]}***" if p else "***EMPTY***"
 
 
