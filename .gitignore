@@ -2,12 +2,17 @@
 venv/
 ENV/
 env/
+.venv/
 
 # Кэш компиляции Python (создается при запусках unittest)
 **/__pycache__/
 *.pyc
 *.pyo
 *.pyd
+
+# Логи
+logs/
+*.log
 
 # Локальные системные файлы операционных систем
 .DS_Store
