@@ -9,7 +9,6 @@ from my_project import validate
 
 class TestLoginValidation(unittest.TestCase):
     """Тесты валидации логина"""
-
     def test_empty_login_returns_error(self):
         """Пустой логин должен отклоняться"""
         is_ok, msg = validate("", "Пароль123!", "Пароль123!")

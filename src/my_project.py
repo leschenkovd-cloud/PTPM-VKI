@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 
 # одинаковый пароль = одинаковый хеш
-def mask(p): return f"***{hashlib.sha256(p.encode()).hexdigest()[:8]}***" if p else "***EMPTY***"
+def mask(p): return f"***{hashlib.sha256(p.encode()).hexdigest()[:8]}***" if p else "***EMPTY***"#хэширование пароля
 
 
 # Основная валидация (возвращает >10 уникальных ошибок)

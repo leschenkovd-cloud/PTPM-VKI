@@ -40,6 +40,15 @@ class TestDeliveryValidation(unittest.TestCase):
         self.assertEqual(cost, -1)
         self.assertEqual(date, "0000-00-00")
 
+    def test_danger(self):
+        cost, date = calculate_delivery_cost(600.0, 600, "опасный")
+        self.assertEqual(cost, -1)
+        self.assertEqual(date, "0000-00-00")
+
+
+
+
+
 
 class TestDeliveryCostCalculation(unittest.TestCase):
     """Тесты расчета стоимости доставки"""
